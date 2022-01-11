@@ -3,6 +3,9 @@ import numpy as np
 import os
 from PIL import Image, ImageSequence
 
+list_size = []
+list_max_value = 0
+
 
 def cv2_imread(file_path) -> np.ndarray:
     img_mat = cv2.imdecode(np.fromfile(file_path, dtype=np.uint8), -1)
@@ -34,7 +37,7 @@ def parseGIF(gifname, key=1):
     iter = ImageSequence.Iterator(im)
     # 获取文件名
     file_name = gifname.split(".")[0]
-    index = 1
+    index = 0
     # 判断目录是否存在
     save_path = f"imgs/{file_name}/png"
     try_path(save_path)
@@ -53,6 +56,7 @@ def from_array(in_ndarray: np.ndarray) -> Image:
 
 
 def png_to_jpg(path, file_name):
+    global list_max_value
     url_list = os.listdir(path)
     for i in url_list:
         # print(i)
@@ -67,6 +71,7 @@ def png_to_jpg(path, file_name):
         img_new.save(
             f"imgs/{file_name}/jpg/{i.split('.')[0]}.jpg", quality=60, subsampling=0)
         # cv_imwrite(f"imgs/{file_name}/jpg/{i.split('.')[0]}.jpg", img, "jpg")
+        list_max_value += 1
 
 
 def write_to_h(path, file_name):
@@ -92,18 +97,19 @@ def write_to_h(path, file_name):
             f"{file_name}[] PROGMEM = " + "{\n\t"
         binfile = open(file, 'rb')  # 打开二进制文件
         size = os.path.getsize(file)  # 获得文件大小
+        re_str_size = 0
         for _ in range(size):
             data = binfile.read(1)  # 每次输出一个字节
-            # print(_10to16(data[0]), "", end="")
             re_str = re_str + _10to16(data[0])
             num += 1
             if num == 16:
                 # break
                 re_str = re_str + "\n\t"
                 num = 0
+            re_str_size += 1
         binfile.close()
         re_str = re_str + "\n};\n"
-        return re_str
+        return (re_str, re_str_size)
 
     os_list = os.listdir(path)
 
@@ -112,8 +118,22 @@ def write_to_h(path, file_name):
     with open(f"{file_name}.h", 'w') as a:
         a.write("#include <pgmspace.h> \n")
         for i in os_list:
-            file_name = i.split('.')[0]
-            a.write(write_to_h_one(path, file_name))
+            _file_name = i.split('.')[0]
+            write_value, size = write_to_h_one(path, _file_name)
+            a.write(write_value)
+            list_size.append(size)
+        a.write("\n\nconst uint8_t *" + file_name +
+                f"[{list_max_value}]" + " PROGMEM {")
+
+        for i in range(list_max_value):
+            a.write(f"{file_name}_{i},")
+
+        a.write("};\nconst uint32_t " + file_name +
+                "_size" + f"[{list_max_value}]"+" PROGMEM {")
+
+        for i in list_size:
+            a.write(f"{i},")
+        a.write("};\n")
 
 
 def init(file_name_all, key=0):
