@@ -3954,4 +3954,5 @@ const uint8_t hutao_31[] PROGMEM = {
 
 
 const uint8_t *hutao[32] PROGMEM {hutao_0,hutao_1,hutao_2,hutao_3,hutao_4,hutao_5,hutao_6,hutao_7,hutao_8,hutao_9,hutao_10,hutao_11,hutao_12,hutao_13,hutao_14,hutao_15,hutao_16,hutao_17,hutao_18,hutao_19,hutao_20,hutao_21,hutao_22,hutao_23,hutao_24,hutao_25,hutao_26,hutao_27,hutao_28,hutao_29,hutao_30,hutao_31,};
+
 const uint32_t hutao_size[32] PROGMEM {1924,1935,1893,1935,1959,1898,1895,1896,1919,1931,1893,1922,1945,1884,1889,1899,1966,1970,1970,1960,1955,1952,1965,1945,1964,1979,1968,1958,1933,1946,1960,1942,};
