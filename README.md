@@ -217,7 +217,7 @@ def init(file_name_all, key=1, image_size=(70, 70)):
 
 具体的公式为
 
-<img src="https://latex.codecogs.com/svg.image?\inline&space;key=\frac{GIFfps}{10}" title="\inline key=\frac{GIFfps}{10}" />
+<img src="https://latex.codecogs.com/png.image?\dpi{110}&space;\bg_black&space;key=\frac{GIFfps}{10}" title="\bg_black key=\frac{GIFfps}{10}" />
 
 如果没看懂，那就用默认的吧
 
