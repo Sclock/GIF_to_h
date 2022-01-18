@@ -1,6 +1,6 @@
 ## 简介
 
-这是一个搭配最新[SD$^3$](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay) 固件里 Animate 方法所用的动图头文件生成方法库，可以简单的使用 GIF 生成 Animate 方法可用的头文件，快速的更改 SD$^3$右下角的动态图像。
+这是一个搭配最新[SD3](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay) 固件里 Animate 方法所用的动图头文件生成方法库，可以简单的使用 GIF 生成 Animate 方法可用的头文件，快速的更改 SD3 右下角的动态图像。
 
 ## 需要使用的库
 
@@ -22,7 +22,7 @@
 
 ### imgAnim 函数的修改方法
 
-- 什么！你说你没有 Animate 库！即刻更新[SD$^3$](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay)！抛弃 - - Arduino,加入光荣的进化吧！
+- 什么！你说你没有 Animate 库！即刻更新[SD3](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay)！抛弃 - - Arduino,加入光荣的进化吧！
 
 - 如果你的版本里有 [Animate.cpp](<(https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay/blob/main/src/Animate/Animate.cpp)>) ,但和链接里的不一样，可以复制全部内容到你的 `Animate.cpp` 里粗暴更新。
 
@@ -207,11 +207,11 @@ def init(file_name_all, key=1, image_size=(70, 70)):
 
 #### 第二个参数
 
-`key` 关键帧参数。众所周知，电影的帧率是 24 帧，也就是一秒刷新 24 张图像。可 [SD$^3$](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay) 由于性能的限制在一秒内并不能稳定的刷新 24 张（大约为稳定刷新 12 张，为防止占用性能过多，故默认一秒刷新 10 张），由于 flash 大小的限制，并不能传入超过 70 张 70\*70 的 jpg 文件。所以如果传入的 GIF 帧率过高，在保持动画速度不变的情况下就需要抽帧。
+`key` 关键帧参数。众所周知，电影的帧率是 24 帧，也就是一秒刷新 24 张图像。可 [SD3](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay) 由于性能的限制在一秒内并不能稳定的刷新 24 张（大约为稳定刷新 12 张，为防止占用性能过多，故默认一秒刷新 10 张），由于 flash 大小的限制，并不能传入超过 70 张 70\*70 的 jpg 文件。所以如果传入的 GIF 帧率过高，在保持动画速度不变的情况下就需要抽帧。
 
 假设你有一个 每秒 60 帧的 GIF，在你刷新率为 60Hz 的电脑上，播放速度为 1x。
 
-可如果你原原本本的传入[SD$^3$](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay)这个 GIF，由于[SD$^3$](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay)的刷新率为 10Hz，在第一秒只能显示出这张 GIF 前 10 帧的图像，而完整的显示则需要六秒，播放速度为 1/6 x。
+可如果你原原本本的传入[SD3](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay)这个 GIF，由于[SD3](https://github.com/SmallDesktopDisplay-team/SmallDesktopDisplay)的刷新率为 10Hz，在第一秒只能显示出这张 GIF 前 10 帧的图像，而完整的显示则需要六秒，播放速度为 1/6 x。
 
 所以，如果你的 GIF 帧率高于 10，则需要按照一定的比率抽帧以保证播放速度不变。
 
