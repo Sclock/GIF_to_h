@@ -5,7 +5,7 @@ list_size = []
 list_max_value = 0
 
 
-def init(file_name_all, key=1):
+def init(file_name_all, key=1, image_size=(70, 70)):
     if file_name_all.split(".")[1] == "gif":
         def try_path(path):
             """检查目录，没有就创建"""
@@ -37,7 +37,7 @@ def init(file_name_all, key=1):
                 if _key % key == 0:
                     print(_key)
                     _frame_resize = _frame.resize((70, 70))
-                    _frame_save = _frame_resize.convert('RGB').resize((70, 70))
+                    _frame_save = _frame_resize.convert('RGB')
                     _frame_save.save(
                         f"{save_path}/{file_name}_{index}.jpg", quality=60, subsampling=0)
                     index += 1
@@ -153,7 +153,13 @@ def init(file_name_all, key=1):
 
 if __name__ == "__main__":
     # 把GIF放到py文件旁边。默认只支持正方形的图片，不是正方形的自己改图片大小
+    # 第一个参数为文件名，需带后缀
     # 第二个参数是是否抽帧，适用于GIF帧率较高的时候，按比例抽帧(2就是每2帧取1帧) 默认为1
+    # 第三个参数为生产的图片尺寸(默认为70,70),如需更改请配合修改对应的坐标参数
+
+    # 如果看不懂这里在什么，请使用默认参数！
+    # 如果看不懂这里在什么，请使用默认参数！
+    # 如果看不懂这里在什么，请使用默认参数！
 
     file_name = "hutao.gif"
-    init(file_name, 5)
+    init(file_name)
