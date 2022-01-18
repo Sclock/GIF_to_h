@@ -35,7 +35,7 @@ def init(file_name_all, key=1, image_size=(70, 70)):
             # 遍历图片流的每一帧并保存为JPG
             for _key, _frame in enumerate(iter):
                 if _key % key == 0:
-                    print(_key)
+                    print(f"遍历帧数：{_key}")
                     _frame_resize = _frame.resize((70, 70))
                     _frame_save = _frame_resize.convert('RGB')
                     _frame_save.save(
